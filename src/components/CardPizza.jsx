@@ -7,7 +7,7 @@ const CardPizza = ({ name, price, ingredients, img }) => {
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text"> Precio: ${price.toLocaleString()}</p>
-        <p> 🍕 Ingedientes:</p>
+        <p> 🍕 Ingredientes:</p>
         <ul>
           {ingredients.map((ingredient, index) => (
             <li key={index}>{ingredient}</li>
