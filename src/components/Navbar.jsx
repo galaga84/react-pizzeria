@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Asegúrate de importar Link
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,10 +16,10 @@ const NavbarComponent = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Pizzería Mamma Mia!</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Pizzería Mamma Mia!</Navbar.Brand>
         <Nav className="w-100 d-flex justify-content-between align-items-center">
           <div className="d-flex gap-3">
-            <Button variant="outline-primary">🍕 Home</Button>
+            <Button variant="outline-primary" as={Link} to="/">🍕 Home</Button>
             {token ? (
               <>
                 <Button variant="outline-primary">🔓 Profile</Button>
@@ -26,8 +27,8 @@ const NavbarComponent = () => {
               </>
             ) : (
               <>
-                <Button variant="outline-primary">🔐 Login</Button>
-                <Button variant="outline-primary">🔐 Register</Button>
+                <Button variant="outline-primary" as={Link} to="/login">🔐 Login</Button>
+                <Button variant="outline-primary" as={Link} to="/register">🔐 Register</Button>
               </>
             )}
           </div>
@@ -42,3 +43,5 @@ const NavbarComponent = () => {
 };
 
 export default NavbarComponent;
+
+
