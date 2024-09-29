@@ -30,7 +30,7 @@ export default function Register() {
     }
 
     
-    alert(`Tu registro se ha llevado a cabo con los siguientes datos, Email: ${email}, Password:${password} <div className=""></div>`);
+    alert(`Tu registro se ha llevado a cabo con los siguientes datos, Email: ${email}, Password:${password}`);
     
   };
 
