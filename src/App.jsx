@@ -6,6 +6,7 @@ import NavbarComponent from './components/Navbar'; // Asegúrate de que se llame
 import Register from './components/Register'; // Importar el componente Register
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> {/* Ruta para la página principal */}
         <Route path="/register" element={<Register />} /> {/* Ruta para la página de registro */}
-        <Route path="/login" element={<Login />} /> {/* Ruta para la página de login */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} /> {/* Ruta para la página de login */}
       </Routes>
 
       <Footer /> {/* Footer siempre visible */}

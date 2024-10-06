@@ -33,7 +33,7 @@ const NavbarComponent = () => {
             )}
           </div>
 
-          <Button variant="outline-success">
+          <Button variant="outline-success" as={Link} to="/cart">
             🛒 Total: ${formatCurrency(total)}
           </Button>
         </Nav>
