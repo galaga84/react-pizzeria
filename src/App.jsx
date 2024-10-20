@@ -1,26 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importar Router y Routes
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import Home from './components/Home';
-import NavbarComponent from './components/Navbar'; // Asegúrate de que se llame NavbarComponent
-import Register from './components/Register'; // Importar el componente Register
+import Home from './pages/Home'; 
+import NavbarComponent from './components/Navbar'; 
+import Register from './pages/Register'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/Login';
-import Cart from './components/Cart';
+import Login from './pages/Login'; 
+import Cart from './pages/Cart'; 
+import NotFound from './components/NotFound'; 
+import Profile from './components/Profile'; 
+import Pizza from './pages/Pizza'; 
 
 function App() {
   return (
-    <Router> {/* Envuelve la aplicación con el Router */}
-      <NavbarComponent /> {/* Navbar siempre visible */}
+    <Router>
+      <NavbarComponent /> 
       
       <Routes>
-        <Route path="/" element={<Home />} /> {/* Ruta para la página principal */}
-        <Route path="/register" element={<Register />} /> {/* Ruta para la página de registro */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/cart" element={<Cart />} /> {/* Ruta para la página de login */}
+        <Route path="/" element={<Home />} /> 
+        <Route path="/register" element={<Register />} /> 
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/cart" element={<Cart />} /> 
+        <Route path="/profile" element={<Profile />} /> 
+        <Route path="/pizza/p001" element={<Pizza />} /> 
+        <Route path="*" element={<NotFound />} /> 
       </Routes>
 
-      <Footer /> {/* Footer siempre visible */}
+      <Footer /> 
     </Router>
   );
 }
