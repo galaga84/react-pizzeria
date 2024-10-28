@@ -1,66 +1,51 @@
-import React, { useState } from 'react';
-import { pizzaCart } from '../assets/js/pizzas'; // Importa el array pizzaCart
-
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
+  const { cartItems, addToCart, removeFromCart, totalPrice } = useContext(CartContext);
 
-  // Función para aumentar la cantidad
-  const increaseQuantity = (id) => {
-    const updatedCart = cart.map((pizza) => {
-      if (pizza.id === id) {
-        return { ...pizza, count: pizza.count + 1 };
-      }
-      return pizza;
-    });
-    setCart(updatedCart);
-  };
-
-  // Función para disminuir la cantidad
-  const decreaseQuantity = (id) => {
-    const updatedCart = cart
-      .map((pizza) => {
-        if (pizza.id === id) {
-          return { ...pizza, count: pizza.count - 1 };
-        }
-        return pizza;
-      })
-      .filter((pizza) => pizza.count > 0); // Elimina la pizza si la cantidad es 0
-    setCart(updatedCart);
-  };
-
-  // Calcular el total
-  const calculateTotal = () => {
-    return cart.reduce((total, pizza) => total + pizza.price * pizza.count, 0);
+  const handleRemove = (index) => {
+    removeFromCart(index); // Llama a la función para eliminar un producto
   };
 
   return (
-    <div className='cart'>
-  <h2>Tu carrito de compras</h2>
-  {cart.length === 0 ? (
-    <p>El carrito está vacío</p>
-  ) : (
-    <div>
-      {cart.map((pizza) => (
-        <div key={pizza.id} className="cart-item">
-          <img src={pizza.img} alt={pizza.name} width="100" />
-          <div>
-            <h5>{pizza.name}</h5>
-            <p>Precio: ${pizza.price.toLocaleString()}</p>
-            <p>Cantidad: {pizza.count}</p>                
-            <div className="button-container" style={{ display: 'flex', gap: '10px' }}>
-              <button type="button" className="btn btn-success" onClick={() => increaseQuantity(pizza.id)}>+</button>
-              <button type="button" className="btn btn-danger" onClick={() => decreaseQuantity(pizza.id)}>-</button>
-            </div>
-          </div>
+    <div className="container">
+      <h2>Carrito de Compras</h2>
+      {cartItems.length === 0 ? (
+        <div>
+          <p>Tu carrito está vacío.</p>
+          <Link to="/">Volver a la tienda</Link>
         </div>
-      ))}
-      <h3>Total: ${calculateTotal().toLocaleString()}</h3>
-      <button type="button" className="btn btn-warning">Pagar</button>
+      ) : (
+        <div>
+          <ul className="list-group">
+            {cartItems.map((item, index) => (
+              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h5>{item.name}</h5>
+                  <p>Precio: ${item.price.toLocaleString('es-CL')}</p>
+                </div>
+                <div>
+                  <button className="btn btn-danger" onClick={() => handleRemove(index)}>
+                    Eliminar
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <h4 className="mt-3">Total: ${totalPrice.toLocaleString('es-CL')}</h4>
+          <button className="btn btn-primary">Proceder a pagar</button>
+        </div>
+      )}
     </div>
-  )}
-</div>
   );
 };
 
 export default Cart;
+
+
+
+
+
+
