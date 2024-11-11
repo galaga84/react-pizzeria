@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom'; // Importa Link para la navegación
 import { CartContext } from '../context/CartContext';
 
-const CardPizza = ({ name, price, ingredients, img, desc }) => {
+const CardPizza = ({ id, name, price, ingredients, img, desc }) => {
   const { addToCart } = useContext(CartContext); // Accede a addToCart del CartContext
 
   const handleAddToCart = () => {
@@ -23,7 +24,7 @@ const CardPizza = ({ name, price, ingredients, img, desc }) => {
           ))}
         </ul>
         <div className='d-flex justify-content-between gap-botones'>
-          <button className="btn btn-warning">Ver más</button>
+          <Link to={`/pizza/${id}`} className="btn btn-warning">Ver más</Link> {/* Enlace a la página de detalles de la pizza */}
           <button className="btn btn-success" onClick={handleAddToCart}>
             Añadir
           </button>
@@ -34,6 +35,7 @@ const CardPizza = ({ name, price, ingredients, img, desc }) => {
 };
 
 export default CardPizza;
+
 
 
 

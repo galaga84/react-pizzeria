@@ -1,18 +1,25 @@
-import React, { useContext } from "react"; // Importa useContext
-import { Link } from "react-router-dom"; // Asegúrate de importar Link
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import { CartContext } from '../context/CartContext'; // Importa CartContext
+import { CartContext } from '../context/CartContext'; 
+import { UserContext } from "../context/UserContext"; // Importa UserContext
 
 const formatCurrency = (amount) => {
   return amount.toLocaleString("es-CL");
 };
 
 const NavbarComponent = () => {
-  const { cartItems, totalPrice } = useContext(CartContext); // Accede al contexto
-  const token = false; // Reemplaza esto con la lógica real de autenticación
+  const { cartItems, totalPrice } = useContext(CartContext);
+  const { token, logout } = useContext(UserContext); // Accede al token y al método logout
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // Llama al método logout
+    navigate("/login"); // Redirige al usuario a la página de login después de cerrar sesión
+  };
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -23,8 +30,8 @@ const NavbarComponent = () => {
             <Button variant="outline-primary" as={Link} to="/">🍕 Home</Button>
             {token ? (
               <>
-                <Button variant="outline-primary">🔓 Profile</Button>
-                <Button variant="outline-danger">🔒 Logout</Button>
+                <Button variant="outline-primary" as={Link} to="/profile">🔓 Profile</Button>
+                <Button variant="outline-danger" onClick={handleLogout}>🔒 Logout</Button> {/* Llama al método handleLogout */}
               </>
             ) : (
               <>
@@ -44,6 +51,10 @@ const NavbarComponent = () => {
 };
 
 export default NavbarComponent;
+
+
+
+
 
 
 
